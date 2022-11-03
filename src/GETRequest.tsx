@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-function GETRequest() {
+interface UserProps {
+  user: string;
+}
+
+function GETRequest(user: UserProps) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -8,12 +12,7 @@ function GETRequest() {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/posts?_limit=10`
-        );
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
+        const response = await fetch('https://ci-dev.in.ripley.cloud/repositories/' + user.user);
         setData(await response.json());
         setError("");
       } catch (err) {
@@ -29,14 +28,13 @@ function GETRequest() {
     makeRequest();
   }, [error]);
 
+  // TODO: get and display data properly
   return (
-    <div className="App">
+    <div className="GETRequest">
       <h1>API Posts</h1>
-      {loading && <div>A moment please...</div>}
-      {error && (
-        <div>{`There is a problem fetching the post data - ${error}`}</div>
-      )}
-      <ul>{data && <h3>{data}</h3>}</ul>
+      {loading && <div>Getting repos for this user...</div>}
+      {error && <div>{`There was an error while grabbing the repos for that user - ${error}`}</div>}
+      {data && <div>{data}</div>}
     </div>
   );
 }
