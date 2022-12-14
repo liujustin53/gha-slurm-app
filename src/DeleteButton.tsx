@@ -1,23 +1,23 @@
 import { useOidcIdToken } from "@axa-fr/react-oidc";
-import { Alert, AlertIcon, Box, Button, Center, Flex, Heading, Input, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { AlertButton } from "./AlertButton";
 
-interface ModifyProps {
+interface DeleteButtonProps {
+  gitHubURL: string;
   getRequest: () => void;
 }
 
-export const ModifyRequest = ({ getRequest }: ModifyProps) => {
+export const DeleteButton = ({gitHubURL, getRequest}: DeleteButtonProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [gitHubURL, setURL] = useState("");
   const { idToken } = useOidcIdToken();
 
   const makeRequest = async () => {
     try {
       setLoading(true);
-      setError("");
       const reqOptions = {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': idToken
@@ -40,28 +40,18 @@ export const ModifyRequest = ({ getRequest }: ModifyProps) => {
   };
 
   return (
-    <Box>
-      <Heading>API Posts</Heading>
-      <Text padding={5}>Please type the URL of the GitHub repository you wish to add or remove</Text>
-      <Input
-        type='url'
-        value={gitHubURL}
-        placeholder='GitHub URL'
-        onChange={(e) => setURL(e.currentTarget.value)}
-      />
-      <Button marginTop={5} onClick={() => {
-        makeRequest();
-        setURL("");
-      }}
-      >
-        Add Repository
-      </Button>
-      {loading && <Text>Modifying repos for this user...</Text>}
+    <>
+      <AlertButton
+        buttonLabel={"Delete"}
+        alertMessage={"Are you sure you want to delete this repository?"}
+        onClick={() => {
+          makeRequest();
+        }} />
       {error &&
-        <Alert marginTop={5} status="error">
+        <Alert status='error'>
           <AlertIcon />
-          {`There was a problem adding that repo to the user - ${error}`}
+          {`There was a problem deleting that repo - ${error}`}
         </Alert>}
-    </Box>
+    </>
   );
 }

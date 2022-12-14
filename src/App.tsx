@@ -9,7 +9,9 @@ import {
   Box,
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink
+  BreadcrumbLink,
+  Flex,
+  Spacer
 } from "@chakra-ui/react"
 import ColorModeSwitcher from "./ColorModeSwitcher";
 import { LogInOutButton } from "./LogInOutButton";
@@ -30,20 +32,23 @@ function App() {
     <ChakraProvider>
       <OidcProvider configuration={configuration}>
         <Box margin={5}>
-          <Breadcrumb p={5}>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">
-                Home
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/profile">
-                Profile
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <LogInOutButton />
-          <ColorModeSwitcher />
+          <Flex alignItems={'center'}>
+            <Breadcrumb p={5}>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">
+                  Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/profile">
+                  Profile
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </Breadcrumb>
+            <Spacer />
+            <ColorModeSwitcher />
+            <LogInOutButton />
+          </Flex>
           <Box textAlign='center' p={5}>
             <Router>
               <Routes>

@@ -1,23 +1,26 @@
-import { useOidc } from "@axa-fr/react-oidc";
-import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
+import { OidcUserStatus, useOidc, useOidcUser } from "@axa-fr/react-oidc";
+import { Box, Button, Flex, Heading, Spacer, Text, VStack } from "@chakra-ui/react";
 
 export const Home = () => {
-  const { renewTokens, isAuthenticated } = useOidc();
+  const { oidcUser, oidcUserLoadingState } = useOidcUser();
 
   return (
     <Box m={5}>
       <VStack spacing={5}>
-        <Heading>Welcome !!!</Heading>
+        <Heading>Welcome</Heading>
         <Text>
-          React Demo Application protected by OpenId Connect
+          React Application protected by OpenId Connect
         </Text>
-          {isAuthenticated && (
-            <Button
+        {oidcUserLoadingState == OidcUserStatus.Loaded && (
+          <Box>
+            <Text>Hello, {oidcUser.name}. Welcome to your dashboard</Text>
+            {/* <Button margin={5}
               onClick={() => renewTokens()}
             >
               Renew Tokens
-            </Button>
-          )}
+            </Button> */}
+          </Box>
+        )}
       </VStack>
     </Box>
   );

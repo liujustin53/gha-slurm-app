@@ -24,15 +24,15 @@ export const LogInOutButton = () => {
     default:
       return (
         <Button
-        size="md"
-        fontSize="lg"
-        variant="ghost"
-        color="current"
-        margin="2"
-        onClick={() => logout()}
-      >
-        Logout
-      </Button>
+          size="md"
+          fontSize="lg"
+          variant="ghost"
+          color="current"
+          margin="2"
+          onClick={() => logout()}
+        >
+          Logout
+        </Button>
       );
   };
 }
