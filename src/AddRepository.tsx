@@ -2,11 +2,11 @@ import { useOidcIdToken } from "@axa-fr/react-oidc";
 import { Alert, AlertIcon, Box, Button, Heading, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-interface ModifyProps {
+interface AddRepoProps {
   getRequest: () => void;
 }
 
-export const AddRepository = ({ getRequest }: ModifyProps) => {
+export const AddRepository = ({ getRequest }: AddRepoProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [gitHubURL, setURL] = useState("");
