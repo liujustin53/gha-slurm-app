@@ -1,7 +1,7 @@
 import { OidcUserStatus, useOidcIdToken, useOidcUser } from "@axa-fr/react-oidc";
 import React, { useEffect, useState } from "react";
-import { GETRequest } from "./GETRequest";
-import { ModifyRequest } from "./ModifyRequest";
+import { RepoList } from "./RepoList";
+import { AddRepository } from "./AddRepository";
 import { Box, SimpleGrid, Text, useStatStyles } from "@chakra-ui/react";
 
 
@@ -38,11 +38,12 @@ export const Profile = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     if (oidcUserLoadingState === OidcUserStatus.Loaded) {
       makeRequest();
     }
-  }, [makeRequest, oidcUserLoadingState]);
+  }, [oidcUserLoadingState]);
 
   switch (oidcUserLoadingState) {
     case OidcUserStatus.Loading:
@@ -55,8 +56,8 @@ export const Profile = () => {
       return (
         <Box margin={5}>
           <SimpleGrid columns={2}>
-            <GETRequest data={data} makeRequest={makeRequest} />
-            <ModifyRequest getRequest={makeRequest} />
+            <RepoList data={data} makeRequest={makeRequest} />
+            <AddRepository getRequest={makeRequest} />
           </SimpleGrid>
         </Box>
       );

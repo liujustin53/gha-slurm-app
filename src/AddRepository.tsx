@@ -1,16 +1,18 @@
 import { useOidcIdToken } from "@axa-fr/react-oidc";
-import { Alert, AlertIcon, Box, Button, Center, Flex, Heading, Input, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, Heading, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 interface ModifyProps {
   getRequest: () => void;
 }
 
-export const ModifyRequest = ({ getRequest }: ModifyProps) => {
+export const AddRepository = ({ getRequest }: ModifyProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [gitHubURL, setURL] = useState("");
   const { idToken } = useOidcIdToken();
+  
+  // make sure input is url
 
   const makeRequest = async () => {
     try {
@@ -41,8 +43,8 @@ export const ModifyRequest = ({ getRequest }: ModifyProps) => {
 
   return (
     <Box>
-      <Heading>API Posts</Heading>
-      <Text padding={5}>Please type the URL of the GitHub repository you wish to add or remove</Text>
+      <Heading>Add Repository</Heading>
+      <Text padding={5}>Please type the URL of the GitHub repository you wish to add</Text>
       <Input
         type='url'
         value={gitHubURL}

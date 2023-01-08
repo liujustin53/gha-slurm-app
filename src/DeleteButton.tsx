@@ -8,7 +8,7 @@ interface DeleteButtonProps {
   getRequest: () => void;
 }
 
-export const DeleteButton = ({gitHubURL, getRequest}: DeleteButtonProps) => {
+export const DeleteButton = ({ gitHubURL, getRequest }: DeleteButtonProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { idToken } = useOidcIdToken();
